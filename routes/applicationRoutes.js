@@ -5,7 +5,6 @@ const router = express.Router();
 
 // ✅ POST: Yeni bir başvuru ekle
 router.post("/basvuru-ekle", async (req, res) => {
-  console.log("İstek gövdesi:", req.body);
   const { ad, soyad, kimlik_no, telefon, adres } = req.body;
 
   // Gerekli alanların kontrolü
@@ -17,12 +16,16 @@ router.post("/basvuru-ekle", async (req, res) => {
 
   try {
     // Veritabanına başvuruyu ekle
-    await pool.query(
+    const result =  await pool.query(
       "INSERT INTO Applications (name, surname, national_id, phone, address) VALUES (?, ?, ?, ?, ?)",
       [ad, soyad, kimlik_no, telefon, adres]
     );
 
-    res.status(201).json({ message: "Başvuru başarıyla gönderildi!" });
+      const newId = result[0].insertId;
+    res.status(201).json({ message: "Başvuru başarıyla gönderildi!",
+      id: newId
+      
+     });
   } catch (err) {
     console.error("Veritabanı hatası:", err);
     res.status(500).json({ message: "Sunucu hatası!", error: err.message });

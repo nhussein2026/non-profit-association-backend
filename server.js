@@ -44,4 +44,10 @@ app.use("/auth", authRoutes);
 // Use application routes
 app.use("/applications", require("./routes/applicationRoutes"));
 
+// Use talepler routes
+app.use("/talepler", require("./routes/TaleplerRoutes"));
+
+// Use talepler routes
+app.use("/", require("./routes/statsRoutes"));
+
 app.listen(5000, () => console.log("Server running on port 5000"));
