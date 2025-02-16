@@ -50,4 +50,13 @@ app.use("/talepler", require("./routes/TaleplerRoutes"));
 // Use talepler routes
 app.use("/", require("./routes/statsRoutes"));
 
+// Use talepler routes
+app.use("/", require("./routes/TaleplerTablosuRoutes"));
+
+// Use talepler routes
+app.use("/", require("./routes/hayirKurumlariRoutes"));
+
+// Use talepler routes
+app.use("/", require("./routes/mevcutkaynaklarRoutes"));
+
 app.listen(5000, () => console.log("Server running on port 5000"));
